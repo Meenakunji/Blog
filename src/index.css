@@ -11,3 +11,89 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Basic styles for the navigation bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: cadetblue;
+  padding: 10px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-right ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right li {
+  margin: 0 10px;
+}
+
+.navbar-right a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Style for the search box */
+.search-box {
+  display: flex;
+  align-items: center;
+}
+
+.search-box input[type="text"] {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-box .filter-box button {
+  padding: 5px 10px;
+  background-color: #666;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.filter-box input[type="text"] {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Media Query for responsiveness */
+@media screen and (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-right {
+    margin-top: 10px;
+  }
+
+  .search-box {
+    margin-top: 10px;
+  }
+
+  .navbar-right ul {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .navbar-right li {
+    margin: 5px 0;
+  }
+}
+
+img {
+  width: 29px;
+    height: 23px;
+}
