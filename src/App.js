@@ -7,8 +7,10 @@ import Navbar from "./Compnants/Navbar";
 import Signup from "./Compnants/Signup";
 import Login from './Compnants/Login';
 import Dashboard from './Compnants/Dashboard';
+import DummyDataComponent from './Compnants/Dummy';
 
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+//import DummyDataComponent from './DummyData/postList';
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
     <Router>
      
      <Navbar/>
+     <DummyDataComponent/>
 
      <Routes>
           <Route  path="/" element={<Dashboard/>} />

@@ -25,7 +25,8 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className='signupcl'>
+    {/* <div className='signupbox'>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -44,8 +45,33 @@ const Signup = () => {
           <button type="submit">Create Account</button>
         </div>
       </form>
+    </div> */}
+    <form onSubmit={handleSubmit}>
+    
+  <div className="mb-3">
+    <label htmlFor="exampleInputEmail1" className="form-label"  >Email address</label>
+    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} required />
+    
+  </div>
+
+   
+  <div className="mb-3">
+    <label htmlFor="username" className="form-label"  value={username} onChange={(e) => setUsername(e.target.value)} required>Username</label>
+    <input type="text" className="form-control" id="username"  value={username} onChange={(e) => setUsername(e.target.value)} required/>
+  </div>
+
+
+  <div className="mb-3">
+    <label htmlFor="exampleInputPassword1" className="form-label">Create Password</label>
+    <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+  </div>
+  
+  <button type="submit" className="btn btn-primary">SignUp</button>
+</form>
     </div>
   );
 };
 
 export default Signup;
+
+

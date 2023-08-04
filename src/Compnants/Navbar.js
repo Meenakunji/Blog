@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import { Link } from 'react-router-dom';
+import DummyDataComponent from './Dummy';
+
+
 
 const Navbar = () => {
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+
+   
+    // Here you can perform the search action using the searchQuery
+    console.log('Searching for:', searchQuery);
+  };
+
   return (
     <nav className="navbar">
        <Link to="/"> <div className="logo">
@@ -22,10 +41,22 @@ const Navbar = () => {
             </div>
           </li>
           <li>
-            <div className="search-box">
+            {/* <div className="search-box">
               <input type="text" placeholder="Search" />
               <button type="submit">Search</button>
-            </div>
+            </div> */}
+             <form onSubmit={handleSearchSubmit}>
+              <div className="search-box">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+                <button type="submit">Search</button>
+               
+              </div>
+            </form>
           </li>
           <li><button><img src="https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png" alt="Profile" /></button></li>
         </ul>
