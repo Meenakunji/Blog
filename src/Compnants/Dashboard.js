@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import Card from "./Card.js"
 
-// import postList from "./DummyData/postList.js"
+ //import postList from "./DummyData/postList.js"
 
-export default function Dashboard() {
-  const [data, setData] = useState([]);
+ import DummyDataComponent from "./Dummy";
+
+ function Dashboard() {
+  //const [data, setData] = useState([]);
+  return(
+  <DummyDataComponent/>
 
  
   // useEffect(() => {
@@ -17,4 +21,7 @@ export default function Dashboard() {
   //   const arr = data.map((item, index)=> (<Card item = {item}/>));
   // console.log(arr);
   // return (<div> {arr}   </div>);
+  );
 }
+
+export default Dashboard;

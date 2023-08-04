@@ -12,8 +12,8 @@ code {
     monospace;
 }
 
-/* Basic styles for the navigation bar */
-nav {
+/* Basic styles for the navigation bar 
+/* nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,7 +41,7 @@ nav {
   text-decoration: none;
 }
 
-/* Style for the search box */
+/* Style for the search box 
 .search-box {
   display: flex;
   align-items: center;
@@ -68,7 +68,7 @@ nav {
   border-radius: 5px;
 }
 
-/* Media Query for responsiveness */
+/* Media Query for responsiveness 
 @media screen and (max-width: 768px) {
   nav {
     flex-direction: column;
@@ -96,4 +96,4 @@ nav {
 img {
   width: 29px;
     height: 23px;
-}
+} */

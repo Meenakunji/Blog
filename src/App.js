@@ -10,6 +10,7 @@ import Dashboard from './Compnants/Dashboard';
 import DummyDataComponent from './Compnants/Dummy';
 
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import Profile from './Compnants/Profile/Profile';
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
     <Router>
      
      <Navbar/>
-     <DummyDataComponent/>
+     <Profile/>
+     
+
 
      <Routes>
           <Route  path="/" element={<Dashboard/>} />

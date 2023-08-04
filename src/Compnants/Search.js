@@ -11,10 +11,11 @@ const SearchComponent = ({ data, searchQuery }) => {
 
   return (
     <div>
+        
       {filteredResults.length > 0 ? (
-        <div>
+        <div className='items'>
           {filteredResults.map((result) => (
-            <div key={result.id}>
+            <div key={result.id} className='itembox'>
               <h2>{result.title}</h2>
               <p>{result.description}</p>
               <p>Author: {result.author}</p>

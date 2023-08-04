@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SearchComponent from './Search';
+import Navbar from './Navbar';
 
 
 const DummyDataComponent = () => {
@@ -11,6 +12,7 @@ const DummyDataComponent = () => {
       topic: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et metus quis tortor gravida facilisis. In hac habitasse platea dictumst.',
       likes: "25",
       comment: "40",
+      Date: "10/05/2019",
     },
     {
       title: 'Sample Title 2',
@@ -19,6 +21,7 @@ const DummyDataComponent = () => {
       topic: 'jjkk ut gravida velit, ut cursus turpis. Ut luctus nunc et diam feugiat ultricies. Vestibulum eu mi vitae risus mattis facilisis.',
       likes: "15",
       comment: "30",
+      Date: "10/05/2020",
     },
 
     {
@@ -28,6 +31,7 @@ const DummyDataComponent = () => {
         topic: 'jdjjdk ut gravida velit, ut cursus turpis. Ut luctus nunc et diam feugiat ultricies. Vestibulum eu mi vitae risus mattis facilisis.',
         likes: "20",
         comment: "35",
+        Date: "9/05/2022",
       },
 
       {
@@ -37,6 +41,7 @@ const DummyDataComponent = () => {
         topic: 'Pkdkdkllllus ut gravida velit, ut cursus turpis. Ut luctus nunc et diam feugiat ultricies. Vestibulum eu mi vitae risus mattis facilisis.',
         likes: "28",
         comment: "48",
+        Date: "10/06/2021",
       },
 
       {
@@ -46,6 +51,7 @@ const DummyDataComponent = () => {
         topic: 'gdhdjdjj ut gravida velit, ut cursus turpis. Ut luctus nunc et diam feugiat ultricies. Vestibulum eu mi vitae risus mattis facilisis.',
         likes: "25",
         comment: "40",
+        Date: "06/05/2023",
       },
     // Add more data items here...
     // {
@@ -57,6 +63,7 @@ const DummyDataComponent = () => {
   ];
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
 //   const handleSearchChange = (e) => {
 //     setSearchQuery(e.target.value);
@@ -73,6 +80,8 @@ const DummyDataComponent = () => {
         placeholder="Search posts, authors, or topics"
       /> */}
 
+       {/* <Navbar onSearchSubmit={handleSearch} /> */}
+
       {/* Render the SearchComponent and pass searchQuery and dummyData */}
       {/* <SearchComponent data={dummyData} searchQuery={searchQuery} /> */}
     </div>
@@ -85,6 +94,7 @@ const DummyDataComponent = () => {
           <p>topic : {dataItem.topic}</p>
           <p>Likes: {dataItem.likes}</p>
           <p>Comment : {dataItem.comment}</p>
+          <p>Date : {dataItem.Date}</p>
           <hr />
         </div>
       ))}
