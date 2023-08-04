@@ -1,55 +1,61 @@
 // Login.js
-import React, { useState } from 'react';
-
+// -----------
+import React, { useState, useEffect } from 'react'
+import { useNavigate,useLocation } from "react-router-dom";
+import "./login.css"
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState({ email_username: '', password: '' })
+  const [error, setError] = useState({});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const {state={}} = useLocation();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login submission here (e.g., validate credentials, authenticate user)
-    console.log('Login submitted:', email, password);
-  };
-
+  const handleChange = (e) => {
+    console.log("e.target.name", e.target.name, e.target.value)
+    setFormData(p => {
+      return { ...p, [e.target.name]: e.target.value }
+    })
+  }
+  const handleLogin = ()=>{
+    const signupEmail = localStorage.getItem("user_email");
+    const signupUsername = localStorage.getItem("user_name");
+    const signupPassword = localStorage.getItem("password");
+    // console.log(formData,formData.email_username, signupEmail, formData.email_username, signupUsername, formData.password , signupPassword );
+    if((formData.email_username === signupEmail || formData.email_username === signupUsername) && formData.password === signupPassword){
+      localStorage.setItem("login_username_email", formData.email);
+      localStorage.setItem("login_password", formData.password);
+      navigate('/');
+      window.location.reload();
+    }else{
+      setError({message: 'email/username or password is incorrect!'})
+    }
+  }
+  const handleCreate = ()=>{
+    navigate('/signup');
+  }
+  useEffect(() => {
+    console.log("effect triggered");
+    setFormData(p=>({...p, email_username: state && state.email, password: state && state.password}))
+  }, []);
   return (
-    <div className='formlogin'>
-
-    {/* <div className='formlogbox'>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+    <div className="login">
+      <div className="login__container">
+        <h2 className='login__signin'>Login</h2>
+        <div className='login__label'>Email/Username</div>
+        <input type="text"  name='email_username' value={formData.email_username} onChange={handleChange} />
+        <div className='login_label login_password'>
+          <span>Password</span>
+          <span onClick={()=>setShow(p=>!p)}>{show ? 'hide': 'show'}</span>
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>
-      </form>
-    </div> */}
+          <input type={show ? 'text' : 'password'}  name='password' value={formData.password} onChange={handleChange} />
+        <div className="login__error">{ error && error.message }</div>
+        <button onClick={handleLogin} disabled={loading}>{loading ? 'Logging': 'Login'}</button>
+        <button onClick={handleCreate} disabled={loading}>create account</button>
 
-    <form onSubmit={handleSubmit}>
-      <h3>Sign In</h3>
-  <div className="mb-3">
-    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} required/>
-    {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
-  </div>
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)}/>
-  </div>
- 
-  <button type="submit" className="btn btn-primary">Submit</button>
-</form>
-
+      </div>
     </div>
-
-    
   );
-};
+}
 
 export default Login;

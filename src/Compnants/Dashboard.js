@@ -1,27 +1,25 @@
+// components/Dashboard.js
+
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Card from "./Card.js"
 
- //import postList from "./DummyData/postList.js"
+export default function Dashboard({data}) {
+  const isLoggedIn = window.localStorage.getItem('login_username_email'); 
 
- import DummyDataComponent from "./Dummy";
+  const navigate = useNavigate();
+  const handleAddPost = () =>{
+    navigate('/addPost');
+  }
 
- function Dashboard() {
-  //const [data, setData] = useState([]);
-  return(
-  <DummyDataComponent/>
+  
 
- 
-  // useEffect(() => {
-  //   fetch("https://dummyjson.com/posts/search?q=love")
-  //     .then((res) => res.json())
-  //     .then((res) => setData(res.posts));
-  // }, []);
-
-  //   const arr = data.map((item, index)=> (<Card item = {item}/>));
-  // console.log(arr);
-  // return (<div> {arr}   </div>);
-  );
+    const arr = data.map((item, index)=> (<Card item = {item}/>));
+  console.log("arr", arr, "data", data);
+  return (<div>
+    {isLoggedIn ? <div><button onClick={handleAddPost}>Add Post</button> </div>: null}
+    <div>post list</div>
+    <div>{arr}</div>
+  </div>);
 }
-
-export default Dashboard;
