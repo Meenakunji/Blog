@@ -8,11 +8,11 @@ import Signup from "./Compnants/Signup";
 import Login from './Compnants/Login';
 import Dashboard from './Compnants/Dashboard';
 
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    
+    // router starts here 
     <Router>
      
      <Navbar/>
