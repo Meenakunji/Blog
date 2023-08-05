@@ -1,157 +1,49 @@
-// import React, { useState } from "react";
-
-// import { Link } from "react-router-dom";
-
-// import "./Navbar.css"
-// //import DummyDataComponent from './Dummy';
-
-// const Navbar = ({ onSearchSubmit }) => {
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const [filterType, setFilterType] = useState("title");
-
-//   const handleSearchChange = (e) => {
-//     setSearchQuery(e.target.value);
-//   };
-
-//   const handleFilterChange = (e) => {
-//     setFilterType(e.target.value);
-//   };
-
-//   const handleSearchSubmit = (e) => {
-//     e.preventDefault();
-
-//     //onSearchSubmit(searchQuery); not definr error
-//     // Here you can perform the search action using the searchQuery
-//     console.log("Searching for:", searchQuery);
-//   };
-
-//   const handleFilterSubmit = (e) => {
-//     e.preventDefault();
-//     //onFilterSubmit(filterType);
-//   };
-
-//   return (
-//     <nav className="navbar">
-//       <Link to="/">
-//         {" "}
-//         <div className="logo">
-//           <img
-//             src="https://cdn-icons-png.flaticon.com/512/3959/3959420.png"
-//             alt="Logo"
-//           />
-//         </div>
-//       </Link>
-
-//       <div className="navbar-right">
-//         <ul>
-//           <li>
-//             <Link to="/signup">SignUp</Link>
-//           </li>
-//           <li>
-//             <Link to="/login">Login</Link>
-//           </li>
-//           {/* <li><button>SignUp</button></li> */}
-//           {/* <li><Link to="/signup">SignUp</Link></li> */}
-
-//           <li>
-//             {/* <div className="filter-box">
-//               <input type="text" placeholder="Filter" />
-//               <button type="submit">Filter</button>
-//             </div> */}
-
-//             <form onSubmit={handleFilterSubmit}>
-//               <div className="filter-box">
-//                 <select value={filterType} onChange={handleFilterChange}>
-//                   <option value="title">Title</option>
-//                   <option value="author">Author</option>
-//                   <option value="date">Date</option>
-//                   <option value="likes">Number of Likes</option>
-//                   <option value="comments">Number of Comments</option>
-//                 </select>
-//                 <button type="submit">Filter</button>
-//               </div>
-//             </form>
-//           </li>
-//           <li>
-//             {/* <div className="search-box">
-//               <input type="text" placeholder="Search" />
-//               <button type="submit">Search</button>
-//             </div> */}
-//             <form onSubmit={handleSearchSubmit}>
-//               <div className="search-box">
-//                 <input
-//                   type="text"
-//                   placeholder="Search"
-//                   value={searchQuery}
-//                   onChange={handleSearchChange}
-//                 />
-//                 <button type="submit">Search</button>
-//               </div>
-//             </form>
-//           </li>
-//           <li>
-//             <button>
-//               <img
-//                 src="https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png"
-//                 alt="Profile"
-//               />
-//             </button>
-//           </li>
-//         </ul>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
-
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import "./Navbar.css";
 
 const Navbar = ({setData}) => {
-  const isLoggedIn = window.localStorage.getItem('login_username_email'); 
+  const [formData,setFormData] = useState({search: '', sortBy:''});
+  const isLoggedIn = window.localStorage.getItem('loginUsers'); 
+  const loginUser = JSON.parse(isLoggedIn) || {};
+  const postList = JSON.parse(window.localStorage.getItem('postList')) || {};
+  const postListArray = Object.keys(postList).map((postKey)=>{
+      return postList[postKey];
+    })
 
-  const logEmail =  window.localStorage.getItem('user_email');
 
-  console.log(logEmail);
+  const handleChange = (e) => {
+    setFormData(p => {
+      return { ...p, [e.target.name]: e.target.value }
+    })
+  }
   const handleLogout =()=>{
-    window.localStorage.removeItem('login_username_email');
-    window.localStorage.removeItem('login_password');
+    window.localStorage.removeItem('loginUsers');
     window.location.reload();
   }
-
-  const  handleFilter= ()=>{
-    // filetr author , likes , title  
-
-    //sort by 
-    // setData(prev=>{
-    //   // prev ==data 
-    //   const newArray = prev.sort((a,b)=>{
-    //     // filetrValue - interger, string , date 
-    //     const filterValue = 1;
-    //     if( typeof filterValue === Number ){
-    //       //sort inter login 
-    //       return  b.likes - a.likes;
-    //     }else if (typeof filterValue === String){
-    //       //sort string logic 
-    //     }
-    //   });
-    //   return newArray;
-    // })
-
-    setData((prev)=>{
-      const filterValue = 'jim';
-      return prev.filter((post)=> post.author === filterValue);
+  const  handleSort= ()=>{
+    setData(()=>{
+      const newArray = [...postListArray]
+      newArray.sort((a,b)=>{
+        if (formData.sortBy === 'likes') {
+          return (b.likes||[]).length - (a.likes ||[]).length;
+        }
+        if (formData.sortBy === 'author') {
+          return a.author.localeCompare(b.author);
+        }
+        return 0; 
+      });
+      return newArray;
     })
+
   }
 
   const handleSearch = ()=>{
-    const searchValue = 'searchValue';
-    setData((prev)=>{
-      return prev.filter((post)=> post.title.include(searchValue));
+    const searchValue = formData.search
+    setData(()=>{
+      const filterVAlue=  postListArray.filter((post)=> post.title.includes(searchValue) || post.author.includes(searchValue));
+      return filterVAlue;
     })
   }
   return (
@@ -163,39 +55,33 @@ const Navbar = ({setData}) => {
       <div className="navbar-right">
         <ul>
           {
-            isLoggedIn ? <button onClick={handleLogout}>Logout</button> : <><li><Link to="/signup">SignUp</Link></li>
+            isLoggedIn ? <span onClick={handleLogout}>Logout</span> : <><li><Link to="/signup">SignUp</Link></li>
             <li><Link to="/login">Login</Link></li></>
           }
 
-          {/* <li>
+          <li>
           <div className="filter-box">
-              <input type="text" placeholder="Filter" />
-              <button onClick={handleFilter}>Filter</button>
+
+              <select name='sortBy' value={formData.sortBy} onChange={handleChange}>
+                <option value={'likes'}>
+                  Likes
+                </option>
+                <option value={'author'}>
+                  author
+                </option>
+              </select>
+              <button onClick={handleSort}>Sort By</button>
             </div>
-          </li> */}
+          </li>
           { isLoggedIn ? (<>
             <li>
-          <div className="filter-box">
-              {/* <input type="text" placeholder="Filter" /> */}
-                 <select>
-                   <option value="title">Title</option>
-                   <option value="author">Author</option>
-                   <option value="date">Date</option>
-                   <option value="likes">Likes</option>
-                   <option value="comments">Comments</option>
-                 </select>
-              <button onClick={handleFilter}>Filter</button>
-            </div>
-          </li>
-            <li>
             <div className="search-box">
-              <input type="text" placeholder="Search" />
-              <button onClick = {handleSearch}>Search</button>
+              <input type="text" name = "search" placeholder="Search"  value = {formData.search} onChange={handleChange}/>
+              <button onClick={handleSearch}>Search</button>
             </div>
           </li>
-            <li className='profileicon'><button><img src="https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png" alt="Profile" /></button>
-               <p>{logEmail}</p>
-            </li>
+            <li><button><img src="https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png" alt="Profile" /></button></li>
+            <li>{loginUser.fullName}</li>
           </>) : null}
           
         </ul>
