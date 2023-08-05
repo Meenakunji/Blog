@@ -24,7 +24,10 @@ function App() {
             
            
             const newArray = (res.posts || []).map((item, index)=>{
-              return {...item, likes: parseInt(Math.random()*100),
+              return {...item, 
+                       likes: parseInt(Math.random()*100),
+                       reading_time: parseInt(Math.random()*50)+"min",
+                        date : parseInt(Math.random()*10)+ "Aug, 20"+parseInt(Math.random()*20),
                        author : "Author"+index+1,
                        imagelink: imagearray[index],
                        

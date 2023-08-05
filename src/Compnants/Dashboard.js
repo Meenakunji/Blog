@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import Card from "./Card.js"
 
+import "./card.css";
+
 export default function Dashboard({data}) {
   const isLoggedIn = window.localStorage.getItem('login_username_email'); 
 
@@ -14,12 +16,13 @@ export default function Dashboard({data}) {
   }
 
   
-
-    const arr = data.map((item, index)=> (<Card item = {item}/>));
-  console.log("arr", arr, "data", data);
+   
+    const arr = data.map((item, index)=> (<Card  item = {item}/>));
+    
+  //console.log("arr", arr, "data", data);
   return (<div>
     {isLoggedIn ? <div><button onClick={handleAddPost}>Add Post</button> </div>: null}
     <div>post list</div>
-    <div>{arr}</div>
+    <div className = "cardbox">{arr}</div>
   </div>);
 }

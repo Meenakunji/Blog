@@ -113,6 +113,10 @@ import "./Navbar.css";
 
 const Navbar = ({setData}) => {
   const isLoggedIn = window.localStorage.getItem('login_username_email'); 
+
+  const logEmail =  window.localStorage.getItem('user_email');
+
+  console.log(logEmail);
   const handleLogout =()=>{
     window.localStorage.removeItem('login_username_email');
     window.localStorage.removeItem('login_password');
@@ -159,24 +163,39 @@ const Navbar = ({setData}) => {
       <div className="navbar-right">
         <ul>
           {
-            isLoggedIn ? <span onClick={handleLogout}>Logout</span> : <><li><Link to="/signup">SignUp</Link></li>
+            isLoggedIn ? <button onClick={handleLogout}>Logout</button> : <><li><Link to="/signup">SignUp</Link></li>
             <li><Link to="/login">Login</Link></li></>
           }
 
-          <li>
+          {/* <li>
           <div className="filter-box">
               <input type="text" placeholder="Filter" />
               <button onClick={handleFilter}>Filter</button>
             </div>
-          </li>
+          </li> */}
           { isLoggedIn ? (<>
+            <li>
+          <div className="filter-box">
+              {/* <input type="text" placeholder="Filter" /> */}
+                 <select>
+                   <option value="title">Title</option>
+                   <option value="author">Author</option>
+                   <option value="date">Date</option>
+                   <option value="likes">Likes</option>
+                   <option value="comments">Comments</option>
+                 </select>
+              <button onClick={handleFilter}>Filter</button>
+            </div>
+          </li>
             <li>
             <div className="search-box">
               <input type="text" placeholder="Search" />
               <button onClick = {handleSearch}>Search</button>
             </div>
           </li>
-            <li><button><img src="https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png" alt="Profile" /></button></li>
+            <li className='profileicon'><button><img src="https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png" alt="Profile" /></button>
+               <p>{logEmail}</p>
+            </li>
           </>) : null}
           
         </ul>

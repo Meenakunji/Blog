@@ -3,18 +3,27 @@ import "./card.css";
 
 export default function Card({item}) {
   return (
+
+    
     <div className = "card">
         <div className="card-header">
 
-        <p>{item.id},  {item.title}</p>
+        <p>Title: {item.title}</p>
+        <p>Topic: {item.topic}</p>
         </div>
-        <div class="card-content">
-        <p> {item.body}</p>
+        <div className="card-content">
+        <p>Description: {item.body}</p>
+        <p>Tags: {item.tags} </p>
         </div>
-        <div class="card-footer">
-        <p>{item.author}</p>
-        <p>{item.likes}</p>
+        <div className="card-footer">
+        <p>Author: {item.author}</p>
+        <p>like: {item.likes}</p>
         </div>
- </div>
+        <div className="card-footer">
+        <p>Date: {item.date}</p>
+        <p>Reading time: {item.reading_time}</p>
+        </div>
+    </div>
+   
   )
 }

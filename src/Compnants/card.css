@@ -17,6 +17,7 @@
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    margin: 10px;
   }
   
   /* Card header */
@@ -44,7 +45,8 @@
   .card-footer {
     background-color: #e0e0e0;
     padding: 16px;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
   }
   
   .card-footer a {
@@ -56,5 +58,10 @@
   
   .card-footer a:hover {
     color: #d32f2f;
+  }
+  .cardbox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
