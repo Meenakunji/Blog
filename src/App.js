@@ -9,6 +9,8 @@ import Signup from "./Compnants/Signup";
 import Login from './Compnants/Login';
 import Dashboard from './Compnants/Dashboard';
 import AddPost from './Compnants/AddPost';
+import {TopPostComp} from './Compnants/toppost/TopPostComp';
+import { RecommendedPost } from './Compnants/recommendedPost/RecommendedPost';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -51,6 +53,8 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/addPost" element={<AddPost/>} />
+          <Route path="/topPost" element={<TopPostComp data={data}/>}/>
+          <Route path='/recommendedPosts' element = {<RecommendedPost data={data}/>}/>
           
       </Routes>
 
