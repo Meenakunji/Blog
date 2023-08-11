@@ -1,8 +1,0 @@
-.headerContainer{
-  display: flex;
-  align-items: center;
-  padding: 4px;
-}
-.headerContainer > div{
-    margin-left: 4px;
-}
