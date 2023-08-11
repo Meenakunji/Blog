@@ -57,7 +57,7 @@ export default function Card({item, currentUser}) {
         </div>
         <div className="card-footer">
         <p><span>Date</span>: {formatDateToSimpleDate(item.dateModified)}</p>
-        {/* <p><span>Reading time</span>: 0 </p> */}
+        <p><span>Reading time</span>: {item.reading_time}</p>
         </div>
         <div className="card-footer">
         {currentUser.email ? <button onClick={handleLike}>{currentPostLikes.includes(currentUser.email) ? 'Liked': 'Like'}</button>: null}

@@ -27,7 +27,7 @@ const Navbar = ({setData}) => {
       const newArray = [...postListArray]
       newArray.sort((a,b)=>{
         if (formData.sortBy === 'likes') {
-          return (b.likes||[]).length - (a.likes ||[]).length;
+          return b.likes.length - a.likes.length;
         }
         if (formData.sortBy === 'author') {
           return a.author.localeCompare(b.author);
@@ -90,4 +90,4 @@ const Navbar = ({setData}) => {
   );
 };
 
-export default Navbar;
+export default Navbar;
